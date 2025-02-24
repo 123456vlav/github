@@ -1,11 +1,171 @@
-\documentclass[12pt]{book}
-\usepackage{amsmath}
+\documentclass{article}
+\usepackage{listings}
+\lstset{language=C}
 
 \begin{document}
+\chapter{An Overview of C}
+\subsection{What is an Operating System?}
 
-\chapter{Programming and Preparation}
+An \textbf{Operating System (OS)} is software that helps your computer run by managing its resources (like memory, processing power, and files). It also provides software tools that you, as a user, can use. Examples of operating systems are \textbf{MS-DOS}, \textbf{OS/2}, and \textbf{UNIX}.
 
+\subsubsection{What Does an Operating System Do?}
+
+\begin{enumerate}
+    \item \textbf{Manages resources}: The OS ensures your computer's hardware (like the CPU, memory, and storage) is used efficiently.
+    \item \textbf{Provides software}: It offers programs that you can use, such as text editors or compilers.
+    \item \textbf{Acts as an interface}: It allows you to interact with the computer’s hardware, like using a mouse or keyboard.
+\end{enumerate}
+
+\subsection{The C Compiler}
+
+When you write a program in the C language, you create a \textbf{source file}. A \textbf{source file} is simply a file that contains the code you've written in C.
+
+\subsubsection{The Role of the Compiler}
+
+\begin{itemize}
+    \item For UNIX systems, the program that turns your source code into something the computer can execute is called a \textbf{compiler}. On UNIX, the C compiler is often invoked using the \texttt{cc} command.
+    \item A \textbf{compiler} is a tool that \textbf{translates} your C code (which humans can understand) into \textbf{machine code} (which the computer can understand).
+\end{itemize}
+
+\section{After Compilation}
+
+Once your code is compiled:
+\subsubsection{On UNIX Systems}
+The compiled program is saved as a file called \texttt{a.out}.
+
+\subsubsection{On MS-DOS Systems}
+The compiled program is saved with the same name as your source file, but it ends with a \texttt{.exe} extension (for example, \texttt{myprogram.c} becomes \texttt{myprogram.exe}).
+
+\subsection{Integrated Development Environments (IDEs)}
+
+Some systems, like \textbf{Borland C++}, combine the text editor and compiler into one tool. This makes it easier to write, compile, and run programs in one place.
+
+\subsection{Steps to Write and Run a C Program (Overview)}
+
+At the end of this chapter, you'll learn the exact steps to:
+
+\subsubsection{Step 1: Edit}
+Write your code in a text editor (like \texttt{vi} on UNIX).
+
+\subsubsection{Step 2: Compile}
+Use the compiler (like \texttt{cc} on UNIX) to turn your code into an executable.
+
+\subsubsection{Step 3: Execute}
+Run the program to see it work.
 \section{Program Output} \label{sec:program_output}
+
+The first program we will write will print the phrase ``from sea to shining C''. Here is the program code:
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main(void) {
+    printf("from sea to shining C\n");
+    return 0;
+}
+\end{lstlisting}
+
+\section*{Compilation and Execution}
+
+Once you have written the program in the file named \texttt{sea.c}, you will compile the program using the following command:
+
+\begin{lstlisting}
+gcc sea.c
+\end{lstlisting}
+
+If there are no errors, an executable file named \texttt{a.out} will be created. You can then run the program with the following command:
+
+\begin{lstlisting}
+./a.out
+\end{lstlisting}
+
+When you run the program, it will print the following output:
+
+\begin{quote}
+from sea to shining C
+\end{quote}
+
+\section*{Program Dissection}
+
+\subsection*{Preprocessor Directives}
+The \#include directive is a preprocessor command. It tells the compiler to include the contents of the \texttt{stdio.h} header file, which contains the declaration of the \texttt{printf} function. The angle brackets \texttt{<stdio.h>} tell the preprocessor to look for the file in the standard system directories.
+
+\subsection*{Main Function}
+The line \texttt{int main(void)} defines the \texttt{main} function, which is the entry point for the program. The \texttt{int} keyword indicates that the function returns an integer value (although it returns \texttt{0} to indicate success). The \texttt{void} inside the parentheses indicates that \texttt{main} does not take any arguments.
+
+\subsection*{Printing Output}
+The \texttt{printf} function is used to print output to the screen. It takes a string as an argument and prints it to the console. In our program, the string \texttt{"from sea to shining C\n"} is printed. The \texttt{\textbackslash n} is a newline character, which moves the cursor to the next line.
+
+\subsection*{Return Statement}
+The \texttt{return 0;} statement ends the \texttt{main} function and returns \texttt{0} to the operating system. This indicates that the program has executed successfully.
+
+\section*{Alternate Versions of the Program}
+
+Here is a modified version of the program where the phrase is split into multiple \texttt{printf} calls:
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main(void) {
+    printf("from sea to ");
+    printf("shining C");
+    printf("\n");
+    return 0;
+}
+\end{lstlisting}
+
+This version produces the same output but uses two \texttt{printf} statements to print the phrase in parts.
+
+We can also print the phrase on multiple lines by using the newline character \texttt{\textbackslash n}:
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main(void) {
+    printf("from sea\n");
+    printf("to shining\nC\n");
+    return 0;
+}
+\end{lstlisting}
+
+When executed, this program will output:
+
+\begin{quote}
+from sea \\
+to shining \\
+C
+\end{quote}
+
+\section*{Boxing the Phrase in Asterisks}
+
+We can modify the program to display the phrase ``boxed'' inside a rectangle of asterisks. Here is the code for that:
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main(void) {
+    printf("\n\n\n\n\n\n\n\n");
+    printf("*************************\n");
+    printf("* from sea *\n");
+    printf("* to shining C *\n");
+    printf("*************************\n");
+    printf("\n\n\n\n\n\n");
+    return 0;
+}
+\end{lstlisting}
+
+This version of the program will print the phrase inside a box of asterisks as shown below:
+
+\begin{quote}
+\begin{verbatim}
+*************************
+* from sea *
+* to shining C *
+*************************
+\end{verbatim}
+\end{quote}
+
+
 \section{Variables, Expressions, and Assignment} \label{sec:variables_expressions_assignment}
 \section{The Use of \#define and \#include} \label{sec:use_define_include}
 \section{The Use of \texttt{printf()} and \texttt{scanf()}} \label{sec:use_printf_scanf}
